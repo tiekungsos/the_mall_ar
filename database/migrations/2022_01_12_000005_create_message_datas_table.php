@@ -14,6 +14,7 @@ class CreateMessageDatasTable extends Migration
             $table->string('to')->nullable();
             $table->longText('message')->nullable();
             $table->boolean('status')->default(0)->nullable();
+            $table->string('code');
             $table->timestamps();
             $table->softDeletes();
         });
