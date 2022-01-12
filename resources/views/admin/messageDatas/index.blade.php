@@ -38,9 +38,6 @@
                             {{ trans('cruds.messageData.fields.model') }}
                         </th>
                         <th>
-                            {{ trans('cruds.arModel.fields.code') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.messageData.fields.code') }}
                         </th>
                         <th>
@@ -69,9 +66,6 @@
                             </td>
                             <td>
                                 {{ $messageData->model->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $messageData->model->code ?? '' }}
                             </td>
                             <td>
                                 {{ $messageData->code ?? '' }}
