@@ -41,6 +41,9 @@
                             {{ trans('cruds.arModel.fields.code') }}
                         </th>
                         <th>
+                            {{ trans('cruds.messageData.fields.code') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -69,6 +72,9 @@
                             </td>
                             <td>
                                 {{ $messageData->model->code ?? '' }}
+                            </td>
+                            <td>
+                                {{ $messageData->code ?? '' }}
                             </td>
                             <td>
                                 @can('message_data_show')

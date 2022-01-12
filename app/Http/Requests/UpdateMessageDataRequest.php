@@ -25,6 +25,10 @@ class UpdateMessageDataRequest extends FormRequest
                 'string',
                 'nullable',
             ],
+            'code' => [
+                'string',
+                'required',
+            ],
         ];
     }
 }

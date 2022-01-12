@@ -89,6 +89,8 @@ return [
             'deleted_at_helper' => ' ',
             'model'             => 'Model',
             'model_helper'      => 'Model',
+            'code'              => 'Code',
+            'code_helper'       => ' ',
         ],
     ],
     'arModel' => [

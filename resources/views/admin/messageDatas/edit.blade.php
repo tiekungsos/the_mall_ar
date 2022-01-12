@@ -58,6 +58,14 @@
                 <span class="help-block">{{ trans('cruds.messageData.fields.model_helper') }}</span>
             </div>
             <div class="form-group">
+                <label class="required" for="code">{{ trans('cruds.messageData.fields.code') }}</label>
+                <input class="form-control {{ $errors->has('code') ? 'is-invalid' : '' }}" type="text" name="code" id="code" value="{{ old('code', $messageData->code) }}" required>
+                @if($errors->has('code'))
+                    <span class="text-danger">{{ $errors->first('code') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.messageData.fields.code_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>

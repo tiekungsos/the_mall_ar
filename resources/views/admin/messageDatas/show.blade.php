@@ -63,6 +63,14 @@
                             {{ $messageData->model->name ?? '' }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.messageData.fields.code') }}
+                        </th>
+                        <td>
+                            {{ $messageData->code }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
