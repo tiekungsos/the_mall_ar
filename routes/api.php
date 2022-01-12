@@ -13,4 +13,7 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Message Data
     Route::post('message-datas/media', 'MessageDataApiController@storeMedia')->name('message-datas.storeMedia');
     Route::apiResource('message-datas', 'MessageDataApiController');
+
+    // Ar Model
+    Route::apiResource('ar-models', 'ArModelApiController');
 });

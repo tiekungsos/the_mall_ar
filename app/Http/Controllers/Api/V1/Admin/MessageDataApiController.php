@@ -20,7 +20,7 @@ class MessageDataApiController extends Controller
     {
         abort_if(Gate::denies('message_data_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new MessageDataResource(MessageData::all());
+        return new MessageDataResource(MessageData::with(['model'])->get());
     }
 
     public function store(StoreMessageDataRequest $request)
@@ -36,7 +36,7 @@ class MessageDataApiController extends Controller
     {
         abort_if(Gate::denies('message_data_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new MessageDataResource($messageData);
+        return new MessageDataResource($messageData->load(['model']));
     }
 
     public function update(UpdateMessageDataRequest $request, MessageData $messageData)

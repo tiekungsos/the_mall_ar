@@ -29,6 +29,7 @@ class MessageData extends Model implements HasMedia
         'to',
         'message',
         'status',
+        'model_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -38,6 +39,11 @@ class MessageData extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')->fit('crop', 50, 50);
         $this->addMediaConversion('preview')->fit('crop', 120, 120);
+    }
+
+    public function model()
+    {
+        return $this->belongsTo(ArModel::class, 'model_id');
     }
 
     protected function serializeDate(DateTimeInterface $date)

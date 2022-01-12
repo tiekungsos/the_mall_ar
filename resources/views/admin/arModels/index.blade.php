@@ -1,41 +1,32 @@
 @extends('layouts.admin')
 @section('content')
-@can('message_data_create')
+@can('ar_model_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route('admin.message-datas.create') }}">
-                {{ trans('global.add') }} {{ trans('cruds.messageData.title_singular') }}
+            <a class="btn btn-success" href="{{ route('admin.ar-models.create') }}">
+                {{ trans('global.add') }} {{ trans('cruds.arModel.title_singular') }}
             </a>
         </div>
     </div>
 @endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.messageData.title_singular') }} {{ trans('global.list') }}
+        {{ trans('cruds.arModel.title_singular') }} {{ trans('global.list') }}
     </div>
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-MessageData">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-ArModel">
                 <thead>
                     <tr>
                         <th width="10">
 
                         </th>
                         <th>
-                            {{ trans('cruds.messageData.fields.id') }}
+                            {{ trans('cruds.arModel.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.messageData.fields.from') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.messageData.fields.to') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.messageData.fields.status') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.messageData.fields.model') }}
+                            {{ trans('cruds.arModel.fields.name') }}
                         </th>
                         <th>
                             {{ trans('cruds.arModel.fields.code') }}
@@ -46,45 +37,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($messageDatas as $key => $messageData)
-                        <tr data-entry-id="{{ $messageData->id }}">
+                    @foreach($arModels as $key => $arModel)
+                        <tr data-entry-id="{{ $arModel->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $messageData->id ?? '' }}
+                                {{ $arModel->id ?? '' }}
                             </td>
                             <td>
-                                {{ $messageData->from ?? '' }}
+                                {{ $arModel->name ?? '' }}
                             </td>
                             <td>
-                                {{ $messageData->to ?? '' }}
+                                {{ $arModel->code ?? '' }}
                             </td>
                             <td>
-                                <span style="display:none">{{ $messageData->status ?? '' }}</span>
-                                <input type="checkbox" disabled="disabled" {{ $messageData->status ? 'checked' : '' }}>
-                            </td>
-                            <td>
-                                {{ $messageData->model->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $messageData->model->code ?? '' }}
-                            </td>
-                            <td>
-                                @can('message_data_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.message-datas.show', $messageData->id) }}">
+                                @can('ar_model_show')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.ar-models.show', $arModel->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
 
-                                @can('message_data_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.message-datas.edit', $messageData->id) }}">
+                                @can('ar_model_edit')
+                                    <a class="btn btn-xs btn-info" href="{{ route('admin.ar-models.edit', $arModel->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
 
-                                @can('message_data_delete')
-                                    <form action="{{ route('admin.message-datas.destroy', $messageData->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                @can('ar_model_delete')
+                                    <form action="{{ route('admin.ar-models.destroy', $arModel->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -109,11 +90,11 @@
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('message_data_delete')
+@can('ar_model_delete')
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.message-datas.massDestroy') }}",
+    url: "{{ route('admin.ar-models.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -144,7 +125,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  let table = $('.datatable-MessageData:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  let table = $('.datatable-ArModel:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();

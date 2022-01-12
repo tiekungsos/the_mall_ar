@@ -31,6 +31,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::post('message-datas/ckmedia', 'MessageDataController@storeCKEditorImages')->name('message-datas.storeCKEditorImages');
     Route::resource('message-datas', 'MessageDataController');
 
+    // Ar Model
+    Route::delete('ar-models/destroy', 'ArModelController@massDestroy')->name('ar-models.massDestroy');
+    Route::resource('ar-models', 'ArModelController');
+
     Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
 });
 Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 'middleware' => ['auth']], function () {

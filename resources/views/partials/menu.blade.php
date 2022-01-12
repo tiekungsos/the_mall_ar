@@ -88,6 +88,18 @@
                         </a>
                     </li>
                 @endcan
+                @can('ar_model_access')
+                    <li class="nav-item">
+                        <a href="{{ route("admin.ar-models.index") }}" class="nav-link {{ request()->is("admin/ar-models") || request()->is("admin/ar-models/*") ? "active" : "" }}">
+                            <i class="fa-fw nav-icon fas fa-cogs">
+
+                            </i>
+                            <p>
+                                {{ trans('cruds.arModel.title') }}
+                            </p>
+                        </a>
+                    </li>
+                @endcan
                 @if(file_exists(app_path('Http/Controllers/Auth/ChangePasswordController.php')))
                     @can('profile_password_edit')
                         <li class="nav-item">

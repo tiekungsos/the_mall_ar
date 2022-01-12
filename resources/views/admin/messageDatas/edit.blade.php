@@ -46,6 +46,18 @@
                 <span class="help-block">{{ trans('cruds.messageData.fields.status_helper') }}</span>
             </div>
             <div class="form-group">
+                <label for="model_id">{{ trans('cruds.messageData.fields.model') }}</label>
+                <select class="form-control select2 {{ $errors->has('model') ? 'is-invalid' : '' }}" name="model_id" id="model_id">
+                    @foreach($models as $id => $entry)
+                        <option value="{{ $id }}" {{ (old('model_id') ? old('model_id') : $messageData->model->id ?? '') == $id ? 'selected' : '' }}>{{ $entry }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('model'))
+                    <span class="text-danger">{{ $errors->first('model') }}</span>
+                @endif
+                <span class="help-block">{{ trans('cruds.messageData.fields.model_helper') }}</span>
+            </div>
+            <div class="form-group">
                 <button class="btn btn-danger" type="submit">
                     {{ trans('global.save') }}
                 </button>
