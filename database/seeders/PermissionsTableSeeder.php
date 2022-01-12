@@ -96,6 +96,26 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
                 'id'    => 22,
+                'title' => 'ar_model_create',
+            ],
+            [
+                'id'    => 23,
+                'title' => 'ar_model_edit',
+            ],
+            [
+                'id'    => 24,
+                'title' => 'ar_model_show',
+            ],
+            [
+                'id'    => 25,
+                'title' => 'ar_model_delete',
+            ],
+            [
+                'id'    => 26,
+                'title' => 'ar_model_access',
+            ],
+            [
+                'id'    => 27,
                 'title' => 'profile_password_edit',
             ],
         ];

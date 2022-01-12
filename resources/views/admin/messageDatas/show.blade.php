@@ -55,6 +55,14 @@
                             <input type="checkbox" disabled="disabled" {{ $messageData->status ? 'checked' : '' }}>
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.messageData.fields.model') }}
+                        </th>
+                        <td>
+                            {{ $messageData->model->name ?? '' }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">

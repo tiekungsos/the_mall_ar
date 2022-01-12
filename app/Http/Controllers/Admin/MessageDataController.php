@@ -7,6 +7,7 @@ use App\Http\Controllers\Traits\MediaUploadingTrait;
 use App\Http\Requests\MassDestroyMessageDataRequest;
 use App\Http\Requests\StoreMessageDataRequest;
 use App\Http\Requests\UpdateMessageDataRequest;
+use App\Models\ArModel;
 use App\Models\MessageData;
 use Gate;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class MessageDataController extends Controller
     {
         abort_if(Gate::denies('message_data_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $messageDatas = MessageData::all();
+        $messageDatas = MessageData::with(['model'])->get();
 
         return view('admin.messageDatas.index', compact('messageDatas'));
     }
@@ -30,7 +31,9 @@ class MessageDataController extends Controller
     {
         abort_if(Gate::denies('message_data_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.messageDatas.create');
+        $models = ArModel::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.messageDatas.create', compact('models'));
     }
 
     public function store(StoreMessageDataRequest $request)
@@ -48,7 +51,11 @@ class MessageDataController extends Controller
     {
         abort_if(Gate::denies('message_data_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.messageDatas.edit', compact('messageData'));
+        $models = ArModel::pluck('name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $messageData->load('model');
+
+        return view('admin.messageDatas.edit', compact('messageData', 'models'));
     }
 
     public function update(UpdateMessageDataRequest $request, MessageData $messageData)
@@ -61,6 +68,8 @@ class MessageDataController extends Controller
     public function show(MessageData $messageData)
     {
         abort_if(Gate::denies('message_data_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $messageData->load('model');
 
         return view('admin.messageDatas.show', compact('messageData'));
     }
